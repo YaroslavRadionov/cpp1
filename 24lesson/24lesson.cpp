@@ -2,36 +2,36 @@
 using namespace std;
 
 class student {
-    string name;
-    int age;
-    int phonenumber;
+	string name;
+	int age;
+	int phonenumber;
 	string specialization;
 public:
-    student() :name("no name"), age(0), phonenumber(0), specialization("no specialization") {}
-    student(string n, int a, int p, string spec) :name(n), age(a), phonenumber(p), specialization(spec) {}
+	student() :name("no name"), age(0), phonenumber(0), specialization("no specialization") {}
+	student(string n, int a, int p, string spec) :name(n), age(a), phonenumber(p), specialization(spec) {}
 	string getname()const
-    {
-        return this->name;
-    }
+	{
+		return this->name;
+	}
 	float getage()const
-    {
-        return this->age;
-    }
+	{
+		return this->age;
+	}
 	float getphonenumber()const
-    {
-        return this->phonenumber;
-    }
+	{
+		return this->phonenumber;
+	}
 	string getspecialization()const
-    {
-        return this->specialization;
-    }
-    void Print()const
-    {
-        cout << "Name :" << name << endl;
-        cout << "Age :" << age << endl;
-        cout << "Phone Number :" << phonenumber << endl;
-        cout << "Specialization :" << specialization << endl;
-    }
+	{
+		return this->specialization;
+	}
+	void Print()const
+	{
+		cout << "Name :" << name << endl;
+		cout << "Age :" << age << endl;
+		cout << "Phone Number :" << phonenumber << endl;
+		cout << "Specialization :" << specialization << endl;
+	}
 	student createstudent(string n, int a, int p, string spec)
 	{
 		student s(n, a, p, spec);
@@ -49,39 +49,44 @@ public:
 
 
 };
-class aspirant: public student
+class aspirant : public student
 {
 	string themeofwork;
-    float sheetswrited;
+	float sheetswrited;
 public:
-    aspirant() :themeofwork("no theme"), sheetswrited(0), student() {}
-    aspirant(string n, int a, int p, string spec,string theme, float s) :themeofwork(theme), sheetswrited(s), student(n, a, p, spec) {}
+	aspirant() :themeofwork("no theme"), sheetswrited(0), student() {}
+	aspirant(string n, int a, int p, string spec, string theme, float s) :themeofwork(theme), sheetswrited(s), student(n, a, p, spec) {}
 
-    void Print()const
-    {
-        cout << "----------------------Aspirant-----------------" << endl;
-        student::Print();
+	void Print()const
+	{
+		student::Print();
 		cout << "Sheets writed :" << sheetswrited << endl;
 		cout << "Theme of work :" << themeofwork << endl;
-    }
+	}
 	aspirant createaspirant(string n, int a, int p, string spec, float s, string theme)
 	{
-		aspirant aspirant(n, a, p, spec,theme, s);
-		return aspirant;
+		aspirant a1(n, a, p, spec, theme, s);
+		return a1;
 	}
 	aspirant createaspirantofstudent(student student, float s, string theme)
 	{
-		aspirant a(student.getname(),student.getage(),student.getphonenumber(),student.getspecialization(), s, theme);
-		
+		aspirant a(student.getname(), student.getage(), student.getphonenumber(), student.getspecialization(), theme, s);
 		return a;
 	}
-	void createaspirantself()
+	aspirant createaspirantself()
 	{
-		createstudentself();
-		cout << "Enter sheets writed: "; float s; cin >> s;
-		cout << "Enter theme of work: "; string theme; cin >> theme;
-		aspirant a(getname(),getage(),getphonenumber(),getspecialization(), s);
-		a.setthemeofwork(theme);
+		student s = createstudentself();
+
+		cout << "Enter sheets writed: ";
+		float sheets;
+		cin >> sheets;
+
+		cout << "Enter theme of work: ";
+		string theme;
+		cin >> theme;
+
+		aspirant a(s.getname(), s.getage(), s.getphonenumber(), s.getspecialization(), theme, sheets);
+		return a;
 	}
 	void setthemeofwork(string theme)
 	{
@@ -107,7 +112,7 @@ public:
 			cout << "Aspirant defended desertation" << endl;
 		else
 			cout << "Aspirant didn't defend desertation" << endl;
-			cout << "wua wua wua wuuuuuuaaaaaaaaa :(" << endl;
+		cout << "wua wua wua wuuuuuuaaaaaaaaa :(" << endl;
 	}
 };
 class passport {
@@ -141,29 +146,40 @@ public:
 
 
 };
-class unboardpassport: public passport
+class unboardpassport : public passport
 {
 	bool visa;
-	float number;
+	string number;
+	string visaname;
 public:
-	unboardpassport() :number(0), passport() {}
-	unboardpassport(string n, int a, int p):number(0), passport(n, a, p) {}
+	unboardpassport(string n, int a, int p, string num) :number(num), visa(false), visaname("no visa"), passport(n, a, p) {}
+	unboardpassport(string n, int a, int p) :number(0), passport(n, a, p) {}
 
 	void Print()const
 	{
-		cout << "----------------------Unboard Passport-----------------" << endl;
 		passport::Print();
 		cout << "Number :" << number << endl;
 		if (visa)
 			cout << "You have a visa" << endl;
 		else
 			cout << "You don't have a visa" << endl;
+		cout << "Passport number :" << number << endl;
+		cout << "Visa country :" << visaname << endl;
 	}
-	void SetVisa(bool v)
+	void setvisa(bool v)
 	{
 		visa = v;
 	}
-	void SetVisaself()
+	void setVisaname(string n)
+	{
+		visaname = n;
+		visa = true;
+	}
+	void setNumber(string n)
+	{
+		number = n;
+	}
+	void setvisaself()
 	{
 		cout << "Do you have a visa?: ";string v; cin >> v;
 		if (v == "yes" || v == "Yes")
@@ -174,12 +190,21 @@ public:
 			cout << "error 404" << endl;
 	}
 };
-
-
 int main()
 {
-	student student1;
-	student1.createstudentself();
-	student.Print();
-
-}
+	//1
+	aspirant aspirant1;
+	aspirant1.createaspirantself();
+	aspirant1.Print();
+	aspirant1.writedesertation(100);
+	aspirant1.Print();
+	aspirant1.defenddesertation();
+	cout << endl;
+	//2
+	passport passport1;
+	passport1 = passport1.createpassportself();
+	unboardpassport unboardpassport1("name", 0, 0, "UA458790");
+	unboardpassport1.setvisaself();
+	unboardpassport1.setVisaname("Veluka Bobania");
+	unboardpassport1.Print();
+	}
