@@ -18,7 +18,6 @@ public:
 	list()
 	{
 		head = tail = nullptr;
-
 	}
 	void addtohead(T value)
 	{
@@ -54,7 +53,7 @@ public:
 		else
 			tail->next = newnode;
 	}
-	int getelement(int pos)
+	T getelement(int pos)
 	{
 		int  i = 0;
 		node* current = head;
@@ -117,6 +116,7 @@ public:
 			node* newnode = new node(current, value, current->next);
 			current->next->previous = newnode;
 			current->next = newnode;
+			
 		}
 		else {
 			addtotail(value);
@@ -161,10 +161,10 @@ public:
 };
 class train
 {
-	string name;
 	int numberoffvagons;
 	list <vagon> vagons;
 public:
+	string name;
 	train()
 	{
 		 numberoffvagons = 0;
@@ -254,7 +254,7 @@ int main()
 	l.printlist();
 	
 	train t;
-
+	cout << "Enter train name: "; cin >> t.name;
 	t.addvagontobeginningself();
 	t.addvagontoendself();
 	t.addvagontobeginningself();
