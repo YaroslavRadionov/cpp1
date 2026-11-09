@@ -52,6 +52,7 @@ public:
 			head = tail = newnode;
 		else
 			tail->next = newnode;
+			tail = newnode;
 	}
 	T getelement(int pos)
 	{
